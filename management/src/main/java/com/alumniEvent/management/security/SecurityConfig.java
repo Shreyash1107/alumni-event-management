@@ -18,7 +18,7 @@ public class SecurityConfig {
         return security.csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(auth->auth.requestMatchers(
                         HttpMethod.POST,"/api/role/saveRoles"
-                ).permitAll())
+                ).permitAll().requestMatchers(HttpMethod.GET,"api/role/viewRoles").permitAll())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
     }

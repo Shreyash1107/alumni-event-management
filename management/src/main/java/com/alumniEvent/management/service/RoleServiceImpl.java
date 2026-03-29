@@ -11,10 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 @Service
 public class RoleServiceImpl implements RoleService{
+
     @Autowired
     private RoleRepository roleRepository;
+
     @Autowired
     private RoleMapper roleMapper;
+
     @Override
     public List<String> saveRole(RoleDto roleDto) {
         List<String> roleSaved = new ArrayList<>();
@@ -23,5 +26,12 @@ public class RoleServiceImpl implements RoleService{
         roleRepository.save(role);
         roleSaved.add("Role " + roleDto.getRoleAssigned().toUpperCase() + " saved successfully");
         return roleSaved;
+    }
+
+    @Override
+    public List<RoleDto> viewRoleDetails() {
+        return roleRepository.findAll()
+                .stream().map(roleMapper::entityToDto)
+                .toList();
     }
 }
