@@ -18,14 +18,22 @@ public class RoleServiceImpl implements RoleService{
     @Autowired
     private RoleMapper roleMapper;
 
+    @Autowired
+    private ValidationService validationService;
+
     @Override
     public List<String> saveRole(RoleDto roleDto) {
         List<String> roleSaved = new ArrayList<>();
-        RoleEntity role = roleMapper.dtoToEntity(roleDto);
-        role.setRoleAssigned(roleDto.getRoleAssigned().toUpperCase());
-        roleRepository.save(role);
-        roleSaved.add("Role " + roleDto.getRoleAssigned().toUpperCase() + " saved successfully");
-        return roleSaved;
+        List<String> roleValidation = validationService.validateRoles(roleDto);
+        if(roleValidation.isEmpty()){
+            RoleEntity role = roleMapper.dtoToEntity(roleDto);
+            role.setRoleAssigned(roleDto.getRoleAssigned().toUpperCase());
+            roleRepository.save(role);
+            roleSaved.add("Role " + roleDto.getRoleAssigned().toUpperCase() + " saved successfully");
+            return roleSaved;
+        }else{
+            return roleValidation;
+        }
     }
 
     @Override
