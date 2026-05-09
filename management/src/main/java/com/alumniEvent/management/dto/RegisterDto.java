@@ -12,5 +12,10 @@ import lombok.ToString;
 public class RegisterDto {
     private int id;
     private String firstName;
-    private String last
+    private String lastName;
+    private String email;
+    private String contact;
+    private String password;
+    private String confirmPassword;
+    private int roleId;
 }
