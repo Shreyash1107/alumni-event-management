@@ -1,11 +1,9 @@
 package com.alumniEvent.management.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ToString
 @NoArgsConstructor
